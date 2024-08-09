@@ -1,16 +1,23 @@
 var map = L.map('map', {
     center: [34.0, 9.0],
-    zoom: 7
+    maxZoom: 14,
+    minZoom: 7,
+    zoom: 7,
 });
+
+map.setMaxBounds([[38.1176061, 12.3431396], [34.5173437, 5.8996582]]);  // Set map bounds to Tunisia
+
 
 // Basemap layers
 var openStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 14,
+    minZoom: 5,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
 var satelliteImagery = L.tileLayer('https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x} ', {
     maxZoom: 14,
+    minZoom: 7,
     attribution: '&copy; <a href="https://www.esri.com/">ESRI</a>'
 });
 
