@@ -8,31 +8,36 @@
     <style>
         body {
             display: flex;
-            flex-direction: row;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
         }
-        #map { 
-            height: 100vh; 
-            width: 50%; 
+
+        #map {
+            flex: 3;
+            height: 100vh;
+            margin: 0;
         }
+
         #controls {
+            flex: 1;
             padding: 20px;
-            width: 50%;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            background-color: #f4f4f4;
         }
-        #slider { 
-            margin-top: 20px; 
-            width: 100%;
+
+        #slider {
+            width: 80%;
         }
-        #year { 
-            font-size: 18px; 
-            margin-top: 10px;
+
+        #year {
+            font-size: 24px;
+            margin-bottom: 20px;
         }
-        #water-body-details {
-            margin-top: 20px;
-            width: 100%;
-        }
+
         #chart-container {
             width: 100%;
             height: 300px;
@@ -42,25 +47,19 @@
 </head>
 <body>
 
-<div id="map"></div>
-<div id="controls">
-    <input type="range" min="2018" max="2023" value="2018" id="slider" step="1">
-    <p>Year: <span id="year">2018</span></p>
-    <div id="water-body-details">
-        <p><strong>Water Body Details:</strong></p>
-        <p>Highest Extent Year: <span id="highest-year">N/A</span></p>
-        <p>Lowest Extent Year: <span id="lowest-year">N/A</span></p>
-        <p>Highest Extent: <span id="highest-extent">N/A</span> sqm</p>
-        <p>Lowest Extent: <span id="lowest-extent">N/A</span> sqm</p>
-    </div>
-    <div id="chart-container">
-        <canvas id="chart"></canvas>
-    </div>
-</div>
+    <div id="map"></div>
 
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="map.js"></script>
+    <div id="controls">
+        <p>Year: <span id="year">2018</span></p>
+        <input type="range" min="2018" max="2023" value="2018" id="slider" step="1">
+        <div id="chart-container">
+            <canvas id="chart"></canvas>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="map.js"></script>
 
 </body>
 </html>
