@@ -1,8 +1,8 @@
 var map = L.map('map', {
-    center: [34.0, 9.0],
+    center: [36.5, 9.5],
     maxZoom: 14,
     minZoom: 7,
-    zoom: 7,
+    zoom: 9,
 });
 
 map.setMaxBounds([[38.1176061, 12.3431396], [34.5173437, 5.8996582]]);  // Set map bounds to Tunisia
@@ -37,7 +37,6 @@ var geoJsonData = {};  // Store all GeoJSON data for charting
 
 // Initialize the chart
 function initChart() {
-    console.log("Initializing chart");
     var ctx = document.getElementById('chart').getContext('2d');
     chart = new Chart(ctx, {
         type: 'line',
@@ -85,7 +84,6 @@ function initChart() {
 
 // Function to update the chart with new data
 function updateChart(data) {
-    console.log("Updating chart with data:", data);
     chart.data.datasets[0].data = data;
     chart.update();
 }
@@ -98,30 +96,25 @@ function calculateTotalArea(year) {
             totalArea += waterBodyAreas[waterBodyId][year];
         }
     }
-    console.log(`Total area for year ${year}:`, totalArea);
     return totalArea;
 }
 
 // Function to update the chart with total surface area across all years
 function updateTotalSurfaceChart() {
-    console.log("Updating total surface chart");
     const totalAreas = [];
     for (let year = 2018; year <= 2023; year++) {
         totalAreas.push(calculateTotalArea(year));
     }
-    console.log("Total areas across years:", totalAreas);
     chart.data.datasets[0].label = 'Total Water Surface Area (sqm)';
     updateChart(totalAreas);
 }
 
 // Function to update the chart for the selected water body
 function updateWaterBodyChart(waterBodyId) {
-    console.log(`Updating chart for water body ID: ${waterBodyId}`);
     const areas = [];
     for (let year = 2018; year <= 2023; year++) {
         areas.push(waterBodyAreas[waterBodyId] && waterBodyAreas[waterBodyId][year] ? waterBodyAreas[waterBodyId][year] : 0);
     }
-    console.log("Areas for selected water body:", areas);
     chart.data.datasets[0].label = `Water Body ID ${waterBodyId} Area (sqm)`;
     updateChart(areas);
 }
@@ -142,7 +135,6 @@ function updateLayerStyles() {
 
 // Function to load GeoJSON data for all years
 function loadAllGeoJson() {
-    console.log("Loading GeoJSON for all years");
 
     let years = ['2018', '2019', '2020', '2021', '2022', '2023'];
     let fetchPromises = years.map(year => fetch(`geojson/water_bodies_${year}.geojson`).then(response => response.json()));
@@ -168,7 +160,6 @@ function loadAllGeoJson() {
                     }
                     waterBodyAreas[waterBodyId][year] = area;
 
-                    console.log(`Added area for water body ${waterBodyId} in year ${year}:`, area);
                 });
             });
 
@@ -184,7 +175,6 @@ function loadAllGeoJson() {
 
 // Function to load and display the GeoJSON for a specific year
 function loadGeoJson(year) {
-    console.log(`Loading GeoJSON for year: ${year}`);
     
     // Remove any previously added water layer
     if (waterLayer) {
@@ -213,7 +203,6 @@ function loadGeoJson(year) {
                 }
 
                 layer.on('click', function() {
-                    console.log(`Water body clicked: ID ${waterBodyId}, Area: ${area}`);
                     selectedWaterBodyId = waterBodyId;
                     updateWaterBodyChart(waterBodyId);
                     updateLayerStyles();  // Update the layer styles to highlight the selected water body
@@ -221,7 +210,6 @@ function loadGeoJson(year) {
             }
         }).addTo(map);
 
-        console.log("Water body areas after loading:", waterBodyAreas);
     } else {
         console.error(`GeoJSON data for year ${year} is not available.`);
     }
