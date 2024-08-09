@@ -37,7 +37,7 @@ body {
 }
 
 #right-panel {
-    flex: 0 0 40%; /* Takes up 40% of the width on larger screens */
+    flex: 0 0 30%; /* Takes up 30% of the width on larger screens */
     padding: 20px;
     display: flex;
     flex-direction: column;
