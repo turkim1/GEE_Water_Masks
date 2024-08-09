@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Water Surface Map</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Surface Water Map - Tunisia</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+    <link rel="stylesheet" href="style.css" >
+
 </head>
 <body>
+
     <div id="map-container">
         <div id="map"></div>
         <div id="slider-container">
@@ -21,20 +24,17 @@
         </div>
 
         <div id="credits">
-            <p>Interactive Water Surface Map</p>
+            <p>Surface Water Map - North Tunisia</p>
             <p>Data Source: Copernicus Sentinel-2</p>
-            <p>Developed by Your Name</p>
+            <p>Processing : Google Earth Engine, QGIS, GeoPandas, Shapely </p>
+            <p>Visualization : Leaflet, Chart.js</p>
+            <p>Developed by <a href="https://fr.linkedin.com/in/mohamed-dhia-turki" > Mohamed Dhia TURKI </a> </p>
         </div>
-    </div>
-
-    <!-- Loading Overlay -->
-    <div id="loading-overlay">
-        <div id="loading-spinner"></div>
-        <p id="loading-text">Loading...</p>
     </div>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="map.js"></script>
+
 </body>
 </html>

@@ -223,50 +223,6 @@ slider.addEventListener('input', function() {
     yearLabel.textContent = year;
     loadGeoJson(year);
 });
-// Function to show the loading overlay
-function showLoadingOverlay() {
-    document.getElementById('loading-overlay').style.display = 'flex';
-}
-
-// Function to hide the loading overlay
-function hideLoadingOverlay() {
-    document.getElementById('loading-overlay').style.display = 'none';
-}
-
-// Example of how to use these functions
-function loadGeoJson(year) {
-    showLoadingOverlay();  // Show loading overlay
-
-    fetch(`geojson/water_bodies_${year}.geojson`)
-        .then(response => response.json())
-        .then(data => {
-            if (waterLayer) {
-                map.removeLayer(waterLayer);
-            }
-
-            waterLayer = L.geoJSON(data, {
-                style: function(feature) {
-                    return { color: 'blue', weight: 1, fillOpacity: 0.5 };
-                },
-                onEachFeature: function(feature, layer) {
-                    var waterBodyId = feature.properties.id;
-                    var area = feature.properties.area_sqm;
-
-                    layer.on('click', function() {
-                        selectedWaterBodyId = waterBodyId;
-                        updateWaterBodyChart(waterBodyId);
-                        updateLayerStyles();
-                    });
-                }
-            }).addTo(map);
-
-            hideLoadingOverlay();  // Hide loading overlay after data is loaded
-        })
-        .catch(error => {
-            console.error('Error loading GeoJSON:', error);
-            hideLoadingOverlay();  // Hide loading overlay if there is an error
-        });
-}
 
 // Load all GeoJSON data initially
 initChart();
