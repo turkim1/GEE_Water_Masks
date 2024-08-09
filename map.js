@@ -1,7 +1,26 @@
-var map = L.map('map').setView([34.0, 9.0], 7);  // Centered over Tunisia
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 14,  // Limit the maximum zoom
+var map = L.map('map', {
+    center: [34.0, 9.0],
+    zoom: 7
+});
+
+// Basemap layers
+var openStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 14,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
+
+var satelliteImagery = L.tileLayer('https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x} ', {
+    maxZoom: 14,
+    attribution: '&copy; <a href="https://www.esri.com/">ESRI</a>'
+});
+
+// Base layer control
+var baseLayers = {
+    "OpenStreetMap": openStreetMap,
+    "Satellite Imagery": satelliteImagery
+};
+
+L.control.layers(baseLayers).addTo(map);
 
 var waterLayer = null;
 var waterBodyAreas = {};  // To track area changes over the years
@@ -16,17 +35,43 @@ function initChart() {
     chart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ['2018', '2019', '2020', '2021', '2022', '2023'],  // Fixed year range
+            labels: ['2018', '2019', '2020', '2021', '2022', '2023'],
             datasets: [{
                 label: 'Total Water Surface Area (sqm)',
                 data: [],
-                borderColor: 'blue',
-                fill: false
+                borderColor: '#3498db',
+                backgroundColor: 'rgba(52, 152, 219, 0.2)',
+                borderWidth: 2,
+                fill: true
             }]
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#333'
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Year',
+                        color: '#333'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Area (sqm)',
+                        color: '#333'
+                    },
+                    beginAtZero: true
+                }
+            }
         }
     });
 }
