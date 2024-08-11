@@ -6,9 +6,18 @@
     <title>Surface Water Map - Tunisia</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
     <link rel="stylesheet" href="style.css" >
-
 </head>
 <body>
+
+    <!-- Welcome message dialog -->
+    <dialog id="welcome">
+        <h1>Surface Water Map - North Tunisia</h1>
+        <p>Explore the surface water changes in North Tunisia from 2018 to 2023. <br> <br>
+            Click on a water body (blue) to visualise its evolution on the chart. <br> 
+            Use the slider to visualise the evolution of water bodies on the map.
+        </p>
+        <button id="close-dialog">Close</button>
+    </dialog>
 
     <div id="map-container">
         <div id="map"></div>
@@ -23,18 +32,37 @@
             <canvas id="chart"></canvas>
         </div>
 
+        <!-- Button to reopen the instructions dialog -->
+        <div id="instructions-button">
+            <button id="show-instructions">Show Instructions</button>
+        </div>
+
         <div id="credits">
             <p>Surface Water Map - North Tunisia</p>
+            <p>Developed by <a href="https://fr.linkedin.com/in/mohamed-dhia-turki">Mohamed Dhia TURKI</a></p>
             <p>Data Source: Copernicus Sentinel-2</p>
-            <p>Processing : Google Earth Engine, QGIS, GeoPandas, Shapely </p>
+            <p>Processing : Google Earth Engine, QGIS, GeoPandas </p>
             <p>Visualization : Leaflet, Chart.js</p>
-            <p>Developed by <a href="https://fr.linkedin.com/in/mohamed-dhia-turki" > Mohamed Dhia TURKI </a> </p>
         </div>
     </div>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="map.js"></script>
+    <script>
+        // Show the dialog on page load
+        const welcomeDialog = document.getElementById('welcome');
+        welcomeDialog.showModal();
 
+        // Close dialog button functionality
+        document.getElementById('close-dialog').addEventListener('click', function() {
+            welcomeDialog.close();
+        });
+
+        // Reopen instructions dialog when the button is clicked
+        document.getElementById('show-instructions').addEventListener('click', function() {
+            welcomeDialog.showModal();
+        });
+    </script>
 </body>
 </html>
