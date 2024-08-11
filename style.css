@@ -63,13 +63,11 @@ body {
 }
 
 #chart-container {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 100%;
-    height: 50vh; /* Set a fixed height for the chart container */
+    height: 50vh;
+    margin-bottom: 20px;
 }
+
 
 #chart {
     width: 100%; /* Chart takes full width of the right panel */
@@ -80,7 +78,7 @@ body {
 
 #credits {
     text-align: center;
-    font-size: 14px;
+    font-size: 16px;
     color: #666;
     margin-top: auto; /* Push credits to the bottom */
     margin-bottom: 0;
